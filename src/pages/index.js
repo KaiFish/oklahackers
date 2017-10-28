@@ -8,10 +8,12 @@ import {
   Geography,
 } from "react-simple-maps"
 import Oklahoma from '../map/oklahoma.json';
+import './index.css';
 
 class App extends Component {
   state = {
-    zoom: 50
+    zoom: 50,
+    county: null
   }
   
   changeZoom = (change) => {
@@ -22,11 +24,18 @@ class App extends Component {
     });
   }
   
+  selectCounty = (county) => {
+    this.setState({
+      county
+    });
+  }
+  
   render() {
-    const { zoom } = this.state;
+    const { zoom, county } = this.state;
     
     return(
       <div>
+        <div className="county">{ county }</div>
         <div onClick={() => this.changeZoom(-10)}>-</div>
         <div onClick={() => this.changeZoom(10)}>+</div>
         <ComposableMap
@@ -46,7 +55,22 @@ class App extends Component {
                   key={ `geography-${i}` }
                   geography={ geography }
                   projection={ projection }
-                  />
+                  onClick={() => this.selectCounty(geography.id)}
+                  style={{
+                    default: {
+                      fill: 'rgb(255, 255, 255)',
+                      stroke: 'rgb(0, 0, 0)',
+                      strokeWidth: 0.02,
+                      outline: 'none'
+                    },
+                    hover:   { 
+                      fill: '#c5c5c5',
+                      stroke: 'rgb(0, 0, 0)',
+                      strokeWidth: 0.02,
+                      outline: 'none'
+                    },
+                  }}
+                />
               )
             })}
           </Geographies>
