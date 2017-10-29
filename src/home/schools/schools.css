@@ -1,0 +1,11 @@
+.schools-list {
+    width: 95%;
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.school-item {
+    padding: 5px;
+    border: 1px solid #b5b5b5;
+    margin: 5px 0px;
+}
