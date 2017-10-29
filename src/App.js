@@ -8,48 +8,79 @@ import {
   Geography,
   Markers,
   Marker
-} from "react-simple-maps"
-import Oklahoma from './map/oklahoma.json';
-import Pin from './map/location-pin.svg';
-import Schools from './map/schools.json';
-import './App.css';
+
+} from "react-simple-maps";
+import Oklahoma from "./map/oklahoma.json";
+import Pin from "./map/location-pin.svg";
+import Schools from "./map/schools.json";
+import "./App.css";
 import Header from './header';
+import { Tooltip, actions } from "redux-tooltip";
+
+const { show, hide } = actions;
 
 class App extends Component {
   state = {
     zoom: 1,
     county: null,
-    markers: Schools.map(school => ({ name: school.INSTNM, coordinates: [school.LONGITUD, school.LATITUDE] }))
+    markers: Schools.map(school => ({
+      name: school.INSTNM,
+      coordinates: [school.LONGITUD, school.LATITUDE]
+    }))
+  };
+
+  constructor() {
+    super();
+    this.handleMove = this.handleMove.bind(this);
+    this.handleLeave = this.handleLeave.bind(this);
   }
-  
-  changeZoom = (change) => {
+  handleMove(geography, evt) {
+    const x = evt.clientX;
+    const y = evt.clientY + window.pageYOffset;
+    this.props.dispatch(
+      show({
+        origin: { x, y },
+        content: geography.properties.name
+      })
+    );
+  }
+  handleLeave() {
+    this.props.dispatch(hide());
+  }
+
+  changeZoom(change) {
     const { zoom } = this.state;
     const newZoom = zoom + change;
     this.setState({
       zoom: newZoom <= 0 ? 1 : newZoom
     });
   }
-  
-  selectCounty = (county) => {
+
+  selectCounty(county) {
     this.setState({
       county
     });
   }
-  
+
   render() {
     const { zoom, county, markers } = this.state;
-    return(
+
+    return (
       <div>
         <Header />
         <div className="county">{ county }</div>
         <div className="map">
           <div className="map-controls">
-            <div className="zoom-control" onClick={() => this.changeZoom(-1)}>-</div>
-            <div className="zoom-control" onClick={() => this.changeZoom(1)}>+</div>
+            <div className="zoom-control" onClick={() => this.changeZoom(-1)}>
+              -
+            </div>
+            <div className="zoom-control" onClick={() => this.changeZoom(1)}>
+              +
+            </div>
           </div>
           <ComposableMap
             projectionConfig={{
-              scale: 3000,
+              scale: 3000
             }}
             projection="mercator"
           >
@@ -57,7 +88,8 @@ class App extends Component {
               center={[-97,35]}
               zoom={zoom}
             >
-            <Geographies geographyUrl="./oklahoma.json">
+
+            <Geographies geographyUrl="/oklahoma.json">
               {(geographies, projection) => geographies.map((geography, i) => {
                 return (
                   <Geography
@@ -71,7 +103,7 @@ class App extends Component {
                         stroke: '#999',
                         outline: 'none'
                       },
-                      hover:   { 
+                      hover:   {
                         fill: '#c5c5c5',
                         outline: 'none'
                       },
@@ -93,7 +125,7 @@ class App extends Component {
           </ComposableMap>
         </div>
       </div>
-    )
+    );
   }
 }
 export default App;
