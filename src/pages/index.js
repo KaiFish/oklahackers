@@ -6,14 +6,19 @@ import {
   ZoomableGroup,
   Geographies,
   Geography,
+  Markers,
+  Marker
 } from "react-simple-maps"
 import Oklahoma from '../map/oklahoma.json';
+import Pin from '../map/location-pin.svg';
+import Schools from '../map/schools.json';
 import './index.css';
 
 class App extends Component {
   state = {
     zoom: 50,
-    county: null
+    county: null,
+    markers: Schools.map(school => ({ coordinates: [school.LONGITUD, school.LATITUDE] }))
   }
   
   changeZoom = (change) => {
@@ -31,7 +36,7 @@ class App extends Component {
   }
   
   render() {
-    const { zoom, county } = this.state;
+    const { zoom, county, markers } = this.state;
     
     return(
       <div>
@@ -74,6 +79,25 @@ class App extends Component {
               )
             })}
           </Geographies>
+          <Markers>
+            {markers.map((marker, i) => (
+              <Marker key={i} marker={marker}>
+                <svg height="10px" width="10px">
+                  <circle height="10px" width="10px" cx={1} cy={1} r={1} />
+                </svg>
+                {/* <text
+                  textAnchor="middle"
+                  style={{
+                    fontFamily: "Roboto, sans-serif",
+                    fill: "#607D8B",
+                    stroke: "none",
+                  }}
+                  >
+                  {marker.name}
+                </text> */}
+              </Marker>
+            ))}
+          </Markers>
           </ZoomableGroup>
         </ComposableMap>
       </div>
