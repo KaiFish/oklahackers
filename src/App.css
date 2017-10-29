@@ -1,0 +1,55 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.map-controls {
+    display: flex;
+    border: 1px solid #b5b5b5;
+    width: 80px;
+    border-radius: 3px;
+    position: absolute;
+    top: 25px;
+    left: 25px;
+}
+
+.zoom-control {
+    padding: 10px;
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: center;
+    position: relative;
+}
+
+.map {
+    margin: 0 auto;
+    width: 800px;
+    border: 1px solid #b5b5b5;
+    border-radius: 2px;
+    margin-top: 25px;
+    position: relative;
+}
