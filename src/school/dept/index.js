@@ -6,27 +6,25 @@ export default function dept(props) {
   return (
     <div>
       <h1> "Academic Depatments" </h1>
-      { props.depts.map(dept => {
-        return (
+      {
+        props.depts.map(dep => {
           <div>
-            <a href = {dept.link}}>
+            <a href={dep.link}>
               <h4>
-                {dept.title}
+                {dep.title}
               </h4>
             </a>
             <h5>
-              {dept.description}
+              {dep.description}
             </h5>
-            <h6> `Contact: ${dept.contactName}`</h6>
+            <h6>{`Contact: ${dep.contactName}`}</h6>
             <h6>
-              {dept.contactEmail}
+              {dep.contactEmail}
             </h6>
           </div>
-      })}
+        })
+      }
     </div>
   );
 }
 
-resources.propTypes = {
-
-};

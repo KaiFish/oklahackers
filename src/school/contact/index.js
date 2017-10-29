@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
 export default function contact(props) {
   return (
     <div>
-      <h1> "Student Contacts" </h1>
+      <h1>Student Contacts</h1>
       { props.student_contacts.map(student => {
         return (
           <div>
-            <img src={student.profilepic}></img>
+            <img style={{ height: 201}}src={student.profilepic || ''}></img>
             <div>
               <h5>
               {student.name}
