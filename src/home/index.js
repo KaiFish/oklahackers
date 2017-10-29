@@ -12,6 +12,7 @@ import Pin from "./map/location-pin.svg";
 import SchoolsData from "./map/schools.json";
 import "./home.css";
 import { Tooltip, actions } from "redux-tooltip";
+import ReactDOM from 'react-dom'
 import Schools from './schools';
 const { show, hide } = actions;
 
@@ -22,13 +23,18 @@ class Home extends Component {
     markers: SchoolsData.map(school => ({
       name: school.INSTNM,
       coordinates: [school.LONGITUD, school.LATITUDE]
-    }))
+    })),
+    mousex: 0,
+    mousey: 0,
+    centerx: -97,
+    centery: 35
   };
 
   constructor() {
     super();
     this.handleMove = this.handleMove.bind(this);
     this.handleLeave = this.handleLeave.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
   }
   handleMove(geography, evt) {
     const x = evt.clientX;
@@ -57,10 +63,10 @@ class Home extends Component {
       county
     });
   }
-  
+
   getCircleSize () {
     const { zoom } = this.state;
-    
+
     if (zoom < 6) {
       return 1;
     } else if (zoom < 8) {
@@ -70,14 +76,41 @@ class Home extends Component {
     }
   }
 
+  componentDidMount() {
+     const map = ReactDOM.findDOMNode(this.refs.map);
+     map.addEventListener('wheel', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+     const map = ReactDOM.findDOMNode(this.refs.map);
+     map.removeEventListener('wheel', this.handleScroll);
+  }
+
+  handleScroll(e) {
+      this.setState({
+          mousex: e.screenX,
+          mousey: e.screenY,
+          centerx: 0 - (e.screenX * 0.0008570014465659957) - 97,
+          centery: 0 - (e.screenY * 0.0003380679493403005) + 35
+      });
+      console.log(this.state.centerx + ", " + this.state.centery);
+      console.log((this.state.mousex) + ", " + (this.state.mousey));
+      console.log(e);
+      this.changeZoom(e.deltaY / -10.0);
+      e.stopPropagation();
+      e.preventDefault();
+      e.returnValue = false;
+      return false;
+  }
+
   render() {
-    const { zoom, county, markers } = this.state;
+    const { zoom, county, markers, centerx, centery } = this.state;
     const circleSize = this.getCircleSize();
     const countySchools = county ? SchoolsData.filter(school => school.COUNTYNM.toLowerCase() === `${county.toLowerCase()} county`) : [];
     return (
       <div>
         <div className="main-data">
-          <div className="map">
+          <div className="map" ref="map">
             <div className="map-controls">
               <div className="zoom-control" onClick={() => this.changeZoom(-1)}>
                 -
