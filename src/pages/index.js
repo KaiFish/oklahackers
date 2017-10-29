@@ -16,9 +16,9 @@ import './index.css';
 
 class App extends Component {
   state = {
-    zoom: 50,
+    zoom: 1,
     county: null,
-    markers: Schools.map(school => ({ coordinates: [school.LONGITUD, school.LATITUDE] }))
+    markers: Schools.map(school => ({ name: school.INSTNM, coordinates: [school.LONGITUD, school.LATITUDE] }))
   }
   
   changeZoom = (change) => {
@@ -41,11 +41,11 @@ class App extends Component {
     return(
       <div>
         <div className="county">{ county }</div>
-        <div onClick={() => this.changeZoom(-10)}>-</div>
-        <div onClick={() => this.changeZoom(10)}>+</div>
+        <div onClick={() => this.changeZoom(-1)}>-</div>
+        <div onClick={() => this.changeZoom(1)}>+</div>
         <ComposableMap
           projectionConfig={{
-            scale: 160,
+            scale: 3000,
           }}
           projection="mercator"
         >
@@ -64,8 +64,8 @@ class App extends Component {
                   style={{
                     default: {
                       fill: 'rgb(255, 255, 255)',
-                      stroke: 'rgb(0, 0, 0)',
-                      strokeWidth: 0.02,
+                      stroke: 'black',
+                      strokeWidth: 0.04,
                       outline: 'none'
                     },
                     hover:   { 
@@ -83,18 +83,8 @@ class App extends Component {
             {markers.map((marker, i) => (
               <Marker key={i} marker={marker}>
                 <svg height="10px" width="10px">
-                  <circle height="10px" width="10px" cx={1} cy={1} r={1} />
+                  <circle cx={1} cy={1} r={1} />
                 </svg>
-                {/* <text
-                  textAnchor="middle"
-                  style={{
-                    fontFamily: "Roboto, sans-serif",
-                    fill: "#607D8B",
-                    stroke: "none",
-                  }}
-                  >
-                  {marker.name}
-                </text> */}
               </Marker>
             ))}
           </Markers>
