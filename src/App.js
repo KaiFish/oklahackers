@@ -25,7 +25,7 @@ class App extends Component {
     const { zoom } = this.state;
     const newZoom = zoom + change;
     this.setState({
-      zoom: newZoom < 0 ? 0 : newZoom
+      zoom: newZoom <= 0 ? 1 : newZoom
     });
   }
   
