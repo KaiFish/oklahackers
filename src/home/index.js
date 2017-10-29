@@ -79,6 +79,7 @@ class Home extends Component {
               scale: 3000
             }}
             projection="mercator"
+            style={{width: "100px"}}
           >
             <ZoomableGroup
               center={[-97,35]}

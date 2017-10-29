@@ -1,0 +1,72 @@
+section.main {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.right-panel {
+  padding-left: 15px;
+}
+
+.event-cover-photo {
+    height: 400px;
+    width: 600px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.description {
+    font-weight: 100;
+    padding: 10px;
+}
+
+.event-title {
+    font-size: 26px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.event-organizer {
+    font-size: 14px;
+    font-style: italic;
+    color: #5d5d5d;
+}
+
+.event-location {
+    height: 200px;
+    width: 300px;
+    border: 1px solid #909090;
+    margin: 10px 0px;
+}
+
+.cal-date {
+    height: 50px;
+    width: 50px;
+    background-size: contain;
+    text-align: center;
+    background-repeat: no-repeat;
+    line-height: 65px;
+}
+
+.cal-month {
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.calendar {
+    padding: 5px;
+}
+
+.top-info {
+    display: flex;
+}
+
+.top-info .left {
+    flex-grow: 1;
+}
+
+a.event-website {
+    color: #0973ff;
+    text-decoration: none;
+}
