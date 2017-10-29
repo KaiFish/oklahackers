@@ -8,7 +8,6 @@ import {
   Marker
 
 } from "react-simple-maps";
-import Oklahoma from "./map/oklahoma.json";
 import Pin from "./map/location-pin.svg";
 import SchoolsData from "./map/schools.json";
 import "./home.css";
