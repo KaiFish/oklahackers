@@ -56,7 +56,7 @@ class App extends Component {
               center={[-97,35]}
               zoom={zoom}
             >
-            <Geographies geographyUrl='./oklahoma.json'>
+            <Geographies geographyUrl='./map/oklahoma.json'>
               {(geographies, projection) => geographies.map((geography, i) => {
                 return (
                   <Geography
