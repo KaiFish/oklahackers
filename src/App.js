@@ -13,6 +13,7 @@ import Oklahoma from './map/oklahoma.json';
 import Pin from './map/location-pin.svg';
 import Schools from './map/schools.json';
 import './App.css';
+import Header from './header';
 
 class App extends Component {
   state = {
@@ -39,6 +40,7 @@ class App extends Component {
     const { zoom, county, markers } = this.state;
     return(
       <div>
+        <Header />
         <div className="county">{ county }</div>
         <div className="map">
           <div className="map-controls">
@@ -65,15 +67,12 @@ class App extends Component {
                     onClick={() => this.selectCounty(geography.id)}
                     style={{
                       default: {
-                        fill: 'rgb(255, 255, 255)',
-                        stroke: 'black',
-                        strokeWidth: 0.04,
+                        fill: '#ddd',
+                        stroke: '#999',
                         outline: 'none'
                       },
                       hover:   { 
                         fill: '#c5c5c5',
-                        stroke: 'rgb(0, 0, 0)',
-                        strokeWidth: 0.02,
                         outline: 'none'
                       },
                     }}
