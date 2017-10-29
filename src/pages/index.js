@@ -41,7 +41,7 @@ class App extends Component {
         <div onClick={() => this.changeZoom(-10)}>-</div>
         <div onClick={() => this.changeZoom(10)}>+</div>
         <ComposableMap
-          style={{width: "100px"}}
+          style={{width: "100%"}}
           projectionConfig={{
             scale: 160,
           }}
