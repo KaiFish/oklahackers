@@ -7,5 +7,6 @@
 .school-item {
     padding: 5px;
     border: 1px solid #b5b5b5;
-    margin: 5px 0px;
+    margin: 5px 15px;
+    box-shadow: 3px 3px 1px #D3D3D3;
 }
