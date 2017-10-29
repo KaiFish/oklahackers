@@ -37,7 +37,6 @@ class App extends Component {
   
   render() {
     const { zoom, county, markers } = this.state;
-    
     return(
       <div>
         <div className="county">{ county }</div>
@@ -56,7 +55,7 @@ class App extends Component {
               center={[-97,35]}
               zoom={zoom}
             >
-            <Geographies geographyUrl='./map/oklahoma.json'>
+            <Geographies geographyUrl="./oklahoma.json">
               {(geographies, projection) => geographies.map((geography, i) => {
                 return (
                   <Geography
