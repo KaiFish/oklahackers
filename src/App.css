@@ -40,9 +40,19 @@
 .zoom-control {
     padding: 10px;
     cursor: pointer;
+    user-select: none;
     flex-grow: 1;
     text-align: center;
     position: relative;
+    background: white;
+}
+
+.zoom-control:hover {
+    box-shadow: inset 0 0 2px #b5b5b5;
+}
+
+.zoom-control:active {
+    background: #b5b5b5;
 }
 
 .map {
